@@ -45,7 +45,7 @@ TCP Vegas is a delay-based TCP congestion control algorithm proposed by Brakmo a
 ##2. Algorithm comparison
 
 ### 2.1 Throughput
-> Wireless
+#### 2.1.1 Wireless
 
 |  | 1s | 3s | 5s | 7s | 9s | 12s | 15s | 20s | AVG |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -62,16 +62,15 @@ TCP Vegas is a delay-based TCP congestion control algorithm proposed by Brakmo a
 | Cwnd-Reno | 141.0 KBytes | 141.0 KBytes | 141.0 KBytes | 141.0 KBytes | 141.0 KBytes | 141.0 KBytes | 141.0 KBytes | 141.0 KBytes |
 | Cwnd-Vegas | 221.0 KBytes | 241.0 KBytes | 235.0 KBytes | 235.0 KBytes | 237.0 KBytes | 235.0 KBytes | 214.0 KBytes | 182.0 KBytes |
 
-![alt text](image.png)
+![alt text](image/image.png)
 
-![alt text](Wireless_Bandwidth.png)
+![alt text](image/Wireless_Bandwidth.png)
 
-![alt text](Wireless_Cwnd.png)
+![alt text](image/Wireless_Cwnd.png)
 
->wired
+>Analysis: In the wireless network test we can see that the BBR and Reno have the best performance but in terms of average bandwidth the Reno performs better.Vegas consistently performs the worst as it chooses to slow down before congestion occurs. From the graph we can also see Cubic's ability to quickly return to the original network situation after experiencing congestion.
 
-**BBR**
-
+#### 2.1.2 Wired
 
 |  | 1s | 3s | 5s | 7s | 9s | 12s | 15s | 20s | AVG |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -87,23 +86,32 @@ TCP Vegas is a delay-based TCP congestion control algorithm proposed by Brakmo a
 | Cwnd-RENO | 138.0 KBytes | 138.0 KBytes | 138.0 KBytes | 138.0 KBytes | 138.0 KBytes | 138.0 KBytes | 138.0 KBytes | 138.0 KBytes |
 | Cwnd-VEGAS | 4.28 KBytes | 4.28 KBytes | 4.28 KBytes | 4.28 KBytes | 4.28 KBytes | 4.28 KBytes | 2.85 KBytes | 4.28 KBytes |
 
-![alt text](Wired_image.png)
+![alt text](image/Wired_image.png)
 
-![alt text](Wired_Bandwidth.png)
+![alt text](image/Wired_Bandwidth.png)
 
-![alt text](Wired_Cwnd.png)
+![alt text](image/Wired_Cwnd.png)
 
+>Analysis: In the wired network test, the network is not in as good a state as it was in the wireless network test because of the objective conditions of the time the experiment was conducted, and we can see that Vegas still performs the worst in bandwidth, while BBR and Reno still perform the best. Similarly, Reno still performs better than BBR on average bandwidth, while Cubic performs the smoothest.
 
 ### 2.2 delay
 
-> Wireless
+#### 2.2.1 Wireless
 
-![alt text](Wireless_delay.png)
+![alt text](image/Wireless_delay.png)
 
->wired
+>Analysis: Although in bandwidth, Vegas does not perform as well as the other three algorithms, but in terms of latency, Vegas is the best, which is related to the congestion prediction mechanism of Vegas, which reduces the rate when there is a high latency, so that it can always keep the latency low. And BBR, Cubic, and Reno perform close to each other.
 
-![alt text](Wired_delay.png)
 
-![alt text](delay_wired_wireless.png)
+#### 2.2.2 Wired
 
-![alt text](BBR_Performance.png)
+![alt text](image/Wired_delay.png)
+
+![alt text](image/delay_wired_wireless.png)
+
+>Analysis: Comparing wired and wireless networks, we can see that Vegas maintains low latency in both network conditions, whereas BBR, Cubic and Reno all show higher latency fluctuations, but on average, Reno performs better in wired networks.
+
+## 2.3 Best Award
+![alt text](image/RENO_Performance.png)
+
+>Analysis:In fact, all four algorithms have aspects where they perform better, for example Vegas consistently performs best in the latency approach, while BBR and Reno, they tend to come closer in performance. Cubic, on the other hand, is a little behind them, but Cubic is consistently more stable in terms of network performance. Taking both wired and wireless networks into account, the Reno achieves the best performance in terms of average bandwidth, and is just behind the Vegas in terms of latency, so I think the Reno is the winner in my network tests. Base on my understanding, Reno is suitable for the low bandwidth and low latency networks, so I guess the network is low bandwidth(Multi user) and low latency(Short distance) state when I conducted the experiment.
